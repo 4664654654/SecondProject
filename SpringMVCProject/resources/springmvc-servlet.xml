@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+        <!-- 处理器映射 -->
+       <!--  <bean name="/index" class="cn.demo.controller.IndexController"></bean> -->
+       <!-- <bean name="/Sj1" class="cn.demo.controller.Sj1"></bean> -->
+       <context:component-scan base-package="cn.demo.controller"/>
+      
+      
+       <!-- 提供对@donreoller,@RequestMapping注解的支持 -->
+       	<mvc:annotation-driven/>
+        <!-- 视图解析器 -->
+        <!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        	<property name="prefix" value="/WEB-INF/jsp/"></property>
+        	<property name="suffix" value=".jsp"></property>
+        </bean> -->
+        
+        
+        <!-- 多试图解析器，允许同样的数据采用不同的view展现 -->
+        <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        	<property name="favorParamter" value="true"></property>
+        	<property name="defaultContentType" value="text/html"></property>
+        	<property name="mediaTypes">
+        		<map>
+        			<entry key="html" value="text/html;charset=utf-8"></entry>
+        			<entry key="json" value="application/json;charset=utf-8"></entry>
+        			<entry key="xml" value="application/xml;charset=utf-8"></entry>
+        		</map>
+        	</property>
+        	<property name="viewResolvers">
+        		<list>
+        			<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        			<property name="prefix" value="/WEB-INF/jsp/"></property>
+        			<property name="suffix" value=".jsp"></property>
+        			</bean>
+        		</list>
+        	</property>
+        </bean>
+</beans>
